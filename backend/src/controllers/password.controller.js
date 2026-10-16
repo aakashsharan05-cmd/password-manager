@@ -34,13 +34,13 @@ async function createPassword(req, res) {
 async function getPassword(req, res) {
     try {
 
-        console.log("LOGGED IN USER:", req.user.id);
+        
 
         const passwords = await passwordModel.find({
             userId: req.user.id
         });
 
-        console.log("PASSWORDS:", passwords);
+     
 
         return res.status(200).json({
             message: "password fetched successfully",
@@ -49,7 +49,7 @@ async function getPassword(req, res) {
 
     } catch (error) {
 
-        console.log("GET PASSWORD ERROR:", error);
+       
 
         return res.status(500).json({
             message: error.message
@@ -60,13 +60,12 @@ async function getPassword(req, res) {
 async function updatePassword(req, res) {
     const { title, url, username, password } = req.body
     try {
-        console.log(req.params.id);
-console.log(req.user.id);
+      
         const pass = await passwordModel.findOne({
             _id: req.params.id,
             userId: req.user.id
         })
-        console.log(pass);
+        
         if (pass == null) {
             return res.status(403).json({
                 message: "error"
@@ -100,15 +99,13 @@ console.log(req.user.id);
 
 async function deletePassword(req, res) {
     try {
-        console.log("PARAM ID:", req.params.id);
-        console.log("USER ID:", req.user.id);
-
+       
         const pass = await passwordModel.findOne({
             _id: req.params.id,
             userId: req.user.id
         });
 
-        console.log("FOUND PASSWORD:", pass);
+     
 
         if (pass == null) {
             return res.status(403).json({
@@ -123,7 +120,7 @@ async function deletePassword(req, res) {
         });
 
     } catch (error) {
-        console.log("DELETE ERROR:", error);
+      
 
         return res.status(500).json({
             message: error.message
