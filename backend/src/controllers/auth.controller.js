@@ -83,4 +83,49 @@ async function login(req, res) {
         }
     })
 }
-module.exports = { register, login }
+
+// =========================
+// GET USER PROFILE
+// =========================
+async function getProfile(req, res) {
+    try {
+        // req.user.id comes from auth middleware (JWT decoded)
+        const user = await userModel.findById(req.user.id).select("-password");
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        res.status(200).json({
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to fetch profile"
+        });
+    }
+}
+
+// =========================
+// LOGOUT
+// =========================
+async function logout(req, res) {
+    // Clear the token cookie using the same options we set it with
+    res.clearCookie("token", {
+        httpOnly: true,
+        sameSite: "lax",
+        secure: false,
+    });
+
+    res.status(200).json({
+        message: "Logged out successfully"
+    });
+}
+
+module.exports = { register, login, getProfile, logout }

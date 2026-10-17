@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -44,6 +44,9 @@ const Login = () => {
       }
 
       alert("Login Successful");
+
+      // Store user info in App-level state so Navbar shows the profile
+      setUser(data.user);
 
       setForm({
         email: "",
