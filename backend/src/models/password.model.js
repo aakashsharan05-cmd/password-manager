@@ -20,8 +20,18 @@ const passwordSchema = new mongoose.Schema({
     },
 
     password: {
-        type: String,
-        required: true,
+        iv: {
+            type: String,
+            required: true,
+        },
+        content: {
+            type: String,
+            required: true,
+        },
+        authTag: {
+            type: String,
+            required: true,
+        },
     },
 
     userId: {

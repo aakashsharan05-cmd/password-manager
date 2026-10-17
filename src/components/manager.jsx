@@ -22,7 +22,7 @@ const Manager = () => {
 const getpassword = async () => {
     try {
         const res = await fetch(
-            "http://localhost:3000/api/auth/get",
+            "http://localhost:5000/api/auth/get",
             {
                 method: "GET",
                 credentials: "include",
@@ -80,7 +80,7 @@ const getpassword = async () => {
 
     try {
       const res = await fetch(
-        "http://localhost:3000/api/auth/create",
+        "http://localhost:5000/api/auth/create",
         {
           method: "POST",
           credentials: "include",
@@ -149,7 +149,7 @@ const getpassword = async () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/auth/update/${editingId}`,
+        `http://localhost:5000/api/auth/update/${editingId}`,
         {
           method: "PUT",
           credentials: "include",
@@ -195,7 +195,7 @@ const getpassword = async () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/auth/delete/${id}`,
+        `http://localhost:5000/api/auth/delete/${id}`,
         {
           method: "DELETE",
           credentials: "include",
